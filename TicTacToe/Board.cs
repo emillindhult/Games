@@ -6,6 +6,7 @@ public class Board
     private readonly Player _player1;
     private readonly Player _player2;
     private Player currentPlayer;
+    private Player? winner;
 
     public Board()
     {
@@ -13,6 +14,29 @@ public class Board
         _player1 = new Player("Player 1", "X");
         _player2 = new Player("Player 2", "O");
         currentPlayer = _player1;
+    }
+
+    public void GameLoop()
+    {
+        Console.CursorVisible = false;
+
+        while (true)
+        {
+            RenderBoard();
+            ProcessInput();
+            winner = CheckForWinner();
+            RenderBoard();
+
+            if (winner is not null)
+            {
+                Console.WriteLine();
+                Console.WriteLine("Congratulations!");
+                Console.WriteLine($"Player {winner.Name} wins!");
+                Console.ReadKey();
+                ClearBoard();
+                currentPlayer = _player1;
+            }
+        }
     }
 
     private void RenderBoard()
@@ -43,17 +67,7 @@ public class Board
         }
     }
 
-    public void GameLoop()
-    {
-        Console.CursorVisible = false;
-        while (true)
-        {
-            RenderBoard();
-            ProcessInput();
-        }
-    }
-
-    public void ProcessInput()
+    private void ProcessInput()
     {
         ConsoleKeyInfo key;
 
@@ -97,5 +111,66 @@ public class Board
         {
             currentPlayer = _player1;
         }
+    }
+
+    private Player? CheckForWinner()
+    {
+        if (_items.BoardItems[0, 0].Mark == _items.BoardItems[0, 1].Mark &&
+            _items.BoardItems[0, 1].Mark == _items.BoardItems[0, 2].Mark &&
+            _items.BoardItems[0, 0].Mark != " ")
+        {
+            return _items.BoardItems[0, 0].Mark == _player1.Marker ? _player1 : _player2;
+        }
+        else if (_items.BoardItems[1, 0].Mark == _items.BoardItems[1, 1].Mark &&
+            _items.BoardItems[1, 1].Mark == _items.BoardItems[1, 2].Mark &&
+            _items.BoardItems[1, 0].Mark != " ")
+        {
+            return _items.BoardItems[1, 0].Mark == _player1.Marker ? _player1 : _player2;
+        }
+        else if (_items.BoardItems[2, 0].Mark == _items.BoardItems[2, 1].Mark &&
+            _items.BoardItems[2, 1].Mark == _items.BoardItems[2, 2].Mark &&
+            _items.BoardItems[2, 0].Mark != " ")
+        {
+            return _items.BoardItems[2, 0].Mark == _player1.Marker ? _player1 : _player2;
+        }
+        else if (_items.BoardItems[0, 0].Mark == _items.BoardItems[1, 0].Mark &&
+            _items.BoardItems[1, 0].Mark == _items.BoardItems[2, 0].Mark &&
+            _items.BoardItems[0, 0].Mark != " ")
+        {
+            return _items.BoardItems[0, 0].Mark == _player1.Marker ? _player1 : _player2;
+        }
+        else if (_items.BoardItems[0, 1].Mark == _items.BoardItems[1, 1].Mark &&
+            _items.BoardItems[1, 1].Mark == _items.BoardItems[2, 1].Mark &&
+            _items.BoardItems[0, 1].Mark != " ")
+        {
+            return _items.BoardItems[0, 1].Mark == _player1.Marker ? _player1 : _player2;
+        }
+        else if (_items.BoardItems[0, 2].Mark == _items.BoardItems[1, 2].Mark &&
+            _items.BoardItems[1, 2].Mark == _items.BoardItems[2, 2].Mark &&
+            _items.BoardItems[0, 2].Mark != " ")
+        {
+            return _items.BoardItems[0, 2].Mark == _player1.Marker ? _player1 : _player2;
+        }
+        else if (_items.BoardItems[0, 0].Mark == _items.BoardItems[1, 1].Mark &&
+            _items.BoardItems[1, 1].Mark == _items.BoardItems[2, 2].Mark &&
+            _items.BoardItems[0, 0].Mark != " ")
+        {
+            return _items.BoardItems[0, 0].Mark == _player1.Marker ? _player1 : _player2;
+        }
+        else if (_items.BoardItems[2, 0].Mark == _items.BoardItems[1, 1].Mark &&
+            _items.BoardItems[1, 1].Mark == _items.BoardItems[0, 2].Mark &&
+            _items.BoardItems[2, 0].Mark != " ")
+        {
+            return _items.BoardItems[2, 0].Mark == _player1.Marker ? _player1 : _player2;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    private void ClearBoard()
+    {
+        _items.ClearBoard();
     }
 }

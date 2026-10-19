@@ -33,7 +33,7 @@ internal class ItemCollection
     public void SelectNextItemLeft()
     {
         if (--selectedCol < 0)
-            selectedCol = boardItems.GetLength(1);
+            selectedCol = boardItems.GetLength(1) - 1;
 
         selectedItem = boardItems[selectedRow, selectedCol];
     }
@@ -41,7 +41,7 @@ internal class ItemCollection
     public void SelectNextItemUp()
     {
         if (--selectedRow < 0)
-            selectedRow = boardItems.GetLength(0);
+            selectedRow = boardItems.GetLength(0) - 1;
 
         selectedItem = boardItems[selectedRow, selectedCol];
     }
@@ -65,5 +65,22 @@ internal class ItemCollection
         selectedItem.Select();
 
         return true;
+    }
+
+    public void ClearBoard()
+    {
+        selectedRow = 0;
+        selectedCol = 0;
+
+        for (int i = 0; i < boardItems.GetLength(0); i++)
+        {
+            for (int j = 0; j < boardItems.GetLength(1); j++)
+            {
+                boardItems[i, j].Mark = " ";
+                if (boardItems[i, j].IsMarked)
+                    boardItems[i, j].Select();
+            }
+        }
+        selectedItem = boardItems[selectedRow, selectedCol];
     }
 }
