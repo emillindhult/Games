@@ -54,13 +54,16 @@ internal class ItemCollection
         selectedItem = boardItems[selectedRow, selectedCol];
     }
 
-    public void MarkItem()
+    public bool MarkItem(Player player)
     {
-        if (selectedItem.Selected)
+        if (selectedItem.IsMarked)
         {
-            return;
+            return false;
         }
-        selectedItem.Mark = "X";
+
+        selectedItem.Mark = player.Marker;
         selectedItem.Select();
+
+        return true;
     }
 }
