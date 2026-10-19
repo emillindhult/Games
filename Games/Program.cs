@@ -1,13 +1,12 @@
 ﻿using TicTacToe;
 
-namespace Games
+namespace GameCenter;
+
+internal class Program
 {
-    internal class Program
+    static void Main(string[] args)
     {
-        static void Main(string[] args)
-        {
-            var board = new Board();
-            board.GameLoop();
-        }
+        var board = new Board();
+        board.GameLoop();
     }
 }
