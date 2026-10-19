@@ -24,22 +24,34 @@ internal class ItemCollection
 
     public void SelectNextItemRight()
     {
-        selectedItem.IncreaseCol();
+        if (++selectedCol > 2)
+            selectedCol = 0;
+        
+        selectedItem = boardItems[selectedRow, selectedCol];
     }
 
     public void SelectNextItemLeft()
     {
-        selectedItem.DecreaseCol();
+        if (--selectedCol < 0)
+            selectedCol = boardItems.GetLength(1);
+
+        selectedItem = boardItems[selectedRow, selectedCol];
     }
 
     public void SelectNextItemUp()
     {
-        selectedItem.DecreaseRow();
+        if (--selectedRow < 0)
+            selectedRow = boardItems.GetLength(0);
+
+        selectedItem = boardItems[selectedRow, selectedCol];
     }
 
     public void SelectNextItemDown()
     {
-        selectedItem.IncreaseRow();
+        if (++selectedRow > 2)
+            selectedRow = 0;
+
+        selectedItem = boardItems[selectedRow, selectedCol];
     }
 
     public void MarkItem()
@@ -48,7 +60,7 @@ internal class ItemCollection
         {
             return;
         }
-
+        selectedItem.Mark = "X";
         selectedItem.Select();
     }
 }

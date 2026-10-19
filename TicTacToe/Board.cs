@@ -78,6 +78,6 @@ public class Board
 
         } while (key.Key != ConsoleKey.Enter);
 
-
+        _items.MarkItem();
     }
 }
