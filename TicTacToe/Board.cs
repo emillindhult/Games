@@ -2,11 +2,17 @@
 
 public class Board
 {
-    private ItemCollection _items;
+    private readonly ItemCollection _items;
+    private readonly Player _player1;
+    private readonly Player _player2;
+    private Player currentPlayer;
 
     public Board()
     {
         _items = new ItemCollection();
+        _player1 = new Player("Player 1", "X");
+        _player2 = new Player("Player 2", "O");
+        currentPlayer = _player1;
     }
 
     private void RenderBoard()
@@ -78,6 +84,18 @@ public class Board
 
         } while (key.Key != ConsoleKey.Enter);
 
-        _items.MarkItem();
+        if (!_items.MarkItem(currentPlayer))
+        {
+            return;
+        }
+
+        if (currentPlayer == _player1)
+        {
+            currentPlayer = _player2;
+        }
+        else
+        {
+            currentPlayer = _player1;
+        }
     }
 }
