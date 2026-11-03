@@ -1,4 +1,5 @@
 <Solution>
   <Project Path="GameCenter/GameCenter.csproj" />
+  <Project Path="Racer/Racer.csproj" Id="26a0fe08-006d-4c9c-a7b6-05cf72c60305" />
   <Project Path="TicTacToe/TicTacToe.csproj" />
 </Solution>
