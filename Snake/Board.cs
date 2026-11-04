@@ -16,26 +16,30 @@ internal sealed class Board
     }
 
     // DELETE THIS LATER
-    public void WriteSnakePosition()
+    public void WriteSnakePosition(ConsoleKeyInfo key)
     {
-        for (int i = 0; i < 6; i++)
+        if (key.Key is ConsoleKey.UpArrow)
         {
-            foreach (var position in _snake.Body)
-            {
-                Console.WriteLine($"x: {position.PointX} y: {position.PointY}");
-            }
-            if (i == 2)
-            {
-                _snake.MoveDown();
-                continue;
-            }
-            if (i == 4)
-            {
-                _snake.MoveUp();
-                continue;
-            }
-            _snake.MoveRight();
-            Thread.Sleep(1000);
+            _snake.MoveUp();
         }
+        else if (key.Key is ConsoleKey.RightArrow || key.Key is ConsoleKey.None)
+        {
+            _snake.MoveRight();
+        }
+        else if (key.Key is ConsoleKey.DownArrow)
+        {
+            _snake.MoveDown();
+        }
+        else if (key.Key is ConsoleKey.LeftArrow)
+        {
+            _snake.MoveLeft();
+        }
+
+        for (int j = 0; j < _snake.Body.Count; j++)
+        {
+            Console.WriteLine(j);
+            Console.WriteLine($"x: {_snake.Body[j].PointX} y: {_snake.Body[j].PointY}");
+        }
+        Task.Delay(500).Wait();
     }
 }

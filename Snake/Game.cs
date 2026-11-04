@@ -6,6 +6,9 @@ public sealed class Game
     private readonly InputHandler _inputHandler;
     private readonly Renderer _renderer;
 
+    private bool gameOver = false;
+    private ConsoleKeyInfo direction;
+
     public Game()
     {
         _board = new Board();
@@ -15,11 +18,23 @@ public sealed class Game
 
     public void Run()
     {
-        SimulateMoving();
+        GameLoop();
+    }
+
+    private void GameLoop()
+    {
+        while (!gameOver)
+        {
+            while(!Console.KeyAvailable)
+            {
+                _board.WriteSnakePosition(direction);
+            }
+            direction = _inputHandler.HandleInput();
+        }
     }
 
     private void SimulateMoving()
     {
-        _board.WriteSnakePosition();
+        // _board.WriteSnakePosition();
     }
 }

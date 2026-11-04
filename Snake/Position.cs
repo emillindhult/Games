@@ -1,6 +1,6 @@
 ﻿namespace Snake;
 
-internal sealed class Position
+internal sealed class Position : IEquatable<Position>
 {
     private int pointX;
     private int pointY;
@@ -37,5 +37,16 @@ internal sealed class Position
     public void MoveDown()
     {
         this.pointY++;
+    }
+
+    public bool Equals(Position? other)
+    {
+        if (other is null)
+            return false;
+
+        if (this.pointX == other.PointX && this.pointY == other.PointY)
+            return true;
+        else
+            return false;
     }
 }
