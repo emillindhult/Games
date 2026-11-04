@@ -12,4 +12,30 @@ internal sealed class Position
         this.pointX = pointX;
         this.pointY = pointY;
     }
+
+    public void ChangePosition(int pointX, int pointY)
+    {
+        this.pointX = pointX;
+        this.pointY = pointY;
+    }
+
+    public void MoveRight()
+    {
+        this.pointX++;
+    }
+
+    public void MoveLeft()
+    {
+        this.pointX--;
+    }
+
+    public void MoveUp()
+    {
+        this.pointY--;
+    }
+
+    public void MoveDown()
+    {
+        this.pointY++;
+    }
 }
