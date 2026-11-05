@@ -3,10 +3,13 @@
 internal sealed class InputHandler
 {
     private ConsoleKeyInfo key;
-    private ConsoleKey[] possibleKeys = { ConsoleKey.UpArrow,
-                                          ConsoleKey.RightArrow,
-                                          ConsoleKey.DownArrow,
-                                          ConsoleKey.LeftArrow };
+    private readonly ConsoleKey[] possibleKeys = 
+    [
+        ConsoleKey.UpArrow,
+        ConsoleKey.RightArrow,
+        ConsoleKey.DownArrow,
+        ConsoleKey.LeftArrow
+    ];
 
     public InputHandler()
     {

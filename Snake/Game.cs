@@ -13,7 +13,7 @@ public sealed class Game
     {
         _board = new Board();
         _inputHandler = new InputHandler();
-        _renderer = new Renderer();
+        _renderer = new Renderer(_board);
     }
 
     public void Run()
@@ -31,10 +31,5 @@ public sealed class Game
             }
             direction = _inputHandler.HandleInput();
         }
-    }
-
-    private void SimulateMoving()
-    {
-        // _board.WriteSnakePosition();
     }
 }
