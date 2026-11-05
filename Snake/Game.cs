@@ -25,9 +25,10 @@ public sealed class Game
     {
         while (!gameOver)
         {
-            while(!Console.KeyAvailable)
+            while (!Console.KeyAvailable)
             {
-                _board.WriteSnakePosition(direction);
+                // _board.WriteSnakePosition(direction);
+                _renderer.Render();
             }
             direction = _inputHandler.HandleInput();
         }

@@ -5,6 +5,7 @@ internal sealed class Snake
     private readonly Position _headStartPosition = new(7, 15);
     private readonly Position _tailStartPosition = new(6, 15);
 
+    private Direction direction;
     private readonly List<Position> _body;
     private readonly Position _head;
     private readonly Position _tail;
@@ -12,7 +13,7 @@ internal sealed class Snake
     public List<Position> Body => _body;
     public Position Head => _head;
 
-    private Direction direction;
+    public ConsoleColor Color { get; } = ConsoleColor.White;
 
     public Snake()
     {
