@@ -27,7 +27,6 @@ public sealed class Game
         {
             while (!Console.KeyAvailable)
             {
-                // _board.WriteSnakePosition(direction);
                 _renderer.Render();
             }
             direction = _inputHandler.HandleInput();

@@ -70,6 +70,10 @@ internal sealed class Board
                 {
                     _grid[i, j] = SnakeBody;
                 }
+                else if (i == 6 && j == 15)
+                {
+                    _grid[i, j] = SnakeBody;
+                }
                 else
                 {
                     _grid[i, j] = " ";
