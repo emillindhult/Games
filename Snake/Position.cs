@@ -21,22 +21,22 @@ internal sealed class Position : IEquatable<Position>
 
     public void MoveRight()
     {
-        this.pointX++;
+        this.pointY++;
     }
 
     public void MoveLeft()
     {
-        this.pointX--;
+        this.pointY--;
     }
 
     public void MoveUp()
     {
-        this.pointY--;
+        this.pointX--;
     }
 
     public void MoveDown()
     {
-        this.pointY++;
+        this.pointX++;
     }
 
     public bool Equals(Position? other)

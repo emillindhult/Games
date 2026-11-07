@@ -3,7 +3,7 @@
 internal sealed class InputHandler
 {
     private ConsoleKeyInfo key;
-    private readonly ConsoleKey[] possibleKeys = 
+    private readonly ConsoleKey[] possibleKeys =
     [
         ConsoleKey.UpArrow,
         ConsoleKey.RightArrow,
@@ -15,13 +15,13 @@ internal sealed class InputHandler
     {
     }
 
-    public ConsoleKeyInfo HandleInput()
+    public ConsoleKey HandleInput()
     {
         do
         {
             key = Console.ReadKey(true);
-        } while (Console.KeyAvailable && !possibleKeys.Contains(key.Key));
+        } while (!possibleKeys.Contains(key.Key));
 
-        return key;
+        return key.Key;
     }
 }

@@ -3,7 +3,10 @@
 internal sealed class Snake
 {
     private readonly Position _headStartPosition = new(7, 15);
-    private readonly Position _tailStartPosition = new(6, 15);
+    private readonly Position _tailStartPosition = new(7, 14);
+
+    public Position HeadStartPosition => _headStartPosition;
+    public Position TailStartPosition => _tailStartPosition;
 
     private Direction direction;
     private readonly List<Position> _body;
@@ -12,6 +15,7 @@ internal sealed class Snake
 
     public List<Position> Body => _body;
     public Position Head => _head;
+    public Position Tail => _tail;
 
     public ConsoleColor Color { get; } = ConsoleColor.White;
 
@@ -27,6 +31,7 @@ internal sealed class Snake
     {
         if (direction is Direction.Left)
         {
+            MoveLeft();
             return;
         }
 
@@ -47,6 +52,7 @@ internal sealed class Snake
     {
         if (direction is Direction.Right)
         {
+            MoveRight();
             return;
         }
 
@@ -67,6 +73,7 @@ internal sealed class Snake
     {
         if (direction is Direction.Down)
         {
+            MoveDown();
             return;
         }
 
@@ -87,6 +94,7 @@ internal sealed class Snake
     {
         if (direction is Direction.Up)
         {
+            MoveUp();
             return;
         }
 

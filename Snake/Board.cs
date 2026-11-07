@@ -62,15 +62,11 @@ internal sealed class Board
                 {
                     _grid[i, j] = VerticalLine;
                 }
-                else if (i == 7 && j == 15)
+                else if (i == _snake.HeadStartPosition.PointX && j == _snake.HeadStartPosition.PointY)
                 {
                     _grid[i, j] = SnakeBody;
                 }
-                else if (i == 7 && j == 14)
-                {
-                    _grid[i, j] = SnakeBody;
-                }
-                else if (i == 6 && j == 15)
+                else if (i == _snake.TailStartPosition.PointX && j == _snake.TailStartPosition.PointY)
                 {
                     _grid[i, j] = SnakeBody;
                 }
@@ -82,31 +78,29 @@ internal sealed class Board
         }
     }
 
-    // DELETE THIS LATER
-    public void WriteSnakePosition(ConsoleKeyInfo key)
+    public void ChangeDirection(ConsoleKey direction)
     {
-        if (key.Key is ConsoleKey.UpArrow)
+        _grid[_snake.Tail.PointX, _snake.Tail.PointY] = " ";
+
+        switch (direction)
         {
-            _snake.MoveUp();
-        }
-        else if (key.Key is ConsoleKey.RightArrow || key.Key is ConsoleKey.None)
-        {
-            _snake.MoveRight();
-        }
-        else if (key.Key is ConsoleKey.DownArrow)
-        {
-            _snake.MoveDown();
-        }
-        else if (key.Key is ConsoleKey.LeftArrow)
-        {
-            _snake.MoveLeft();
+            case ConsoleKey.UpArrow:
+                _snake.MoveUp();
+                break;
+            case ConsoleKey.RightArrow:
+                _snake.MoveRight();
+                break;
+            case ConsoleKey.DownArrow:
+                _snake.MoveDown();
+                break;
+            case ConsoleKey.LeftArrow:
+                _snake.MoveLeft();
+                break;
         }
 
-        for (int j = 0; j < _snake.Body.Count; j++)
+        foreach (var part in _snake.Body)
         {
-            Console.WriteLine(j);
-            Console.WriteLine($"x: {_snake.Body[j].PointX} y: {_snake.Body[j].PointY}");
+            _grid[part.PointX, part.PointY] = SnakeBody;
         }
-        Task.Delay(500).Wait();
     }
 }

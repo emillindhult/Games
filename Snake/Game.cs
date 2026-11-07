@@ -7,7 +7,7 @@ public sealed class Game
     private readonly Renderer _renderer;
 
     private bool gameOver = false;
-    private ConsoleKeyInfo direction;
+    private ConsoleKey direction;
 
     public Game()
     {
@@ -23,13 +23,15 @@ public sealed class Game
 
     private void GameLoop()
     {
+        _renderer.Render();
         while (!gameOver)
         {
+            direction = _inputHandler.HandleInput();
             while (!Console.KeyAvailable)
             {
+                _board.ChangeDirection(direction);
                 _renderer.Render();
             }
-            direction = _inputHandler.HandleInput();
         }
     }
 }

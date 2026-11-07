@@ -5,15 +5,11 @@ namespace Snake;
 internal sealed class Renderer : IRenderer
 {
     private readonly Board _board;
-    private readonly Snake _snake;
-    private readonly Food _food;
-    private StringBuilder frameBuffer;
+    private readonly StringBuilder frameBuffer;
 
     public Renderer(Board board)
     {
         _board = board;
-        _snake = _board.Snake;
-        _food = _board.Food;
         frameBuffer = new StringBuilder();
         Console.CursorVisible = false;
         Console.Clear();
@@ -33,5 +29,6 @@ internal sealed class Renderer : IRenderer
         }
         Console.SetCursorPosition(0, 0);
         Console.Out.Write(frameBuffer);
+        Thread.Sleep(250);
     }
 }
