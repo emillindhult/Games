@@ -9,6 +9,8 @@ internal sealed class Snake
     public Position TailStartPosition => _tailStartPosition;
 
     private Direction direction;
+    public Direction Direction => direction;
+
     private readonly List<Position> _body;
     private readonly Position _head;
     private readonly Position _tail;
@@ -42,7 +44,7 @@ internal sealed class Snake
 
         for (int i = 1; i < _body.Count; i++)
         {
-            _body[i].ChangePosition(tempX, tempY);
+            _body[i].SetPosition(tempX, tempY);
         }
 
         direction = Direction.Right;
@@ -63,7 +65,7 @@ internal sealed class Snake
 
         for (int i = 1; i < _body.Count; i++)
         {
-            _body[i].ChangePosition(tempX, tempY);
+            _body[i].SetPosition(tempX, tempY);
         }
 
         direction = Direction.Left;
@@ -84,7 +86,7 @@ internal sealed class Snake
 
         for (int i = 1; i < _body.Count; i++)
         {
-            _body[i].ChangePosition(tempX, tempY);
+            _body[i].SetPosition(tempX, tempY);
         }
 
         direction = Direction.Up;
@@ -105,7 +107,7 @@ internal sealed class Snake
 
         for (int i = 1; i < _body.Count; i++)
         {
-            _body[i].ChangePosition(tempX, tempY);
+            _body[i].SetPosition(tempX, tempY);
         }
 
         direction = Direction.Down;

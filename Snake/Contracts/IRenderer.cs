@@ -2,5 +2,5 @@ namespace Snake;
 
 public interface IRenderer
 {
-    void Render();
+    void Render(bool gameOver);
 }

@@ -13,7 +13,7 @@ internal sealed class Position : IEquatable<Position>
         this.pointY = pointY;
     }
 
-    public void ChangePosition(int pointX, int pointY)
+    public void SetPosition(int pointX, int pointY)
     {
         this.pointX = pointX;
         this.pointY = pointY;

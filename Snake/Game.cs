@@ -3,7 +3,6 @@
 public sealed class Game
 {
     private readonly Board _board;
-    private readonly InputHandler _inputHandler;
     private readonly Renderer _renderer;
 
     private bool gameOver = false;
@@ -12,7 +11,6 @@ public sealed class Game
     public Game()
     {
         _board = new Board();
-        _inputHandler = new InputHandler();
         _renderer = new Renderer(_board);
     }
 
@@ -23,14 +21,14 @@ public sealed class Game
 
     private void GameLoop()
     {
-        _renderer.Render();
+        _renderer.Render(gameOver);
         while (!gameOver)
         {
-            direction = _inputHandler.HandleInput();
+            direction = InputHandler.HandleInput();
             while (!Console.KeyAvailable)
             {
-                _board.ChangeDirection(direction);
-                _renderer.Render();
+                gameOver = _board.ChangeDirection(direction);
+                _renderer.Render(gameOver);
             }
         }
     }

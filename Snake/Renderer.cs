@@ -15,7 +15,7 @@ internal sealed class Renderer : IRenderer
         Console.Clear();
     }
 
-    public void Render()
+    public void Render(bool gameOver)
     {
         frameBuffer.Clear();
 
@@ -27,8 +27,16 @@ internal sealed class Renderer : IRenderer
             }
             frameBuffer.AppendLine();
         }
+
+        if (gameOver)
+        {
+            frameBuffer.AppendLine();
+            frameBuffer.AppendLine("GAME OVER");
+            frameBuffer.AppendLine("Press any key to continue...");
+        }
+
         Console.SetCursorPosition(0, 0);
         Console.Out.Write(frameBuffer);
-        Thread.Sleep(250);
+        Thread.Sleep(180);
     }
 }
