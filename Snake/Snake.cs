@@ -13,7 +13,7 @@ internal sealed class Snake
 
     private readonly List<Position> _body;
     private readonly Position _head;
-    private readonly Position _tail;
+    private Position _tail;
 
     public List<Position> Body => _body;
     public Position Head => _head;
@@ -37,15 +37,12 @@ internal sealed class Snake
             return;
         }
 
-        int tempX = _head.PointX;
-        int tempY = _head.PointY;
+        int headX = _head.PointX;
+        int headY = _head.PointY;
 
         _head.MoveRight();
 
-        for (int i = 1; i < _body.Count; i++)
-        {
-            _body[i].SetPosition(tempX, tempY);
-        }
+        RepositionBody(headX, headY);
 
         direction = Direction.Right;
     }
@@ -58,15 +55,12 @@ internal sealed class Snake
             return;
         }
 
-        int tempX = _head.PointX;
-        int tempY = _head.PointY;
+        int headX = _head.PointX;
+        int headY = _head.PointY;
 
         _head.MoveLeft();
 
-        for (int i = 1; i < _body.Count; i++)
-        {
-            _body[i].SetPosition(tempX, tempY);
-        }
+        RepositionBody(headX, headY);
 
         direction = Direction.Left;
     }
@@ -79,15 +73,12 @@ internal sealed class Snake
             return;
         }
 
-        int tempX = _head.PointX;
-        int tempY = _head.PointY;
+        int headX = _head.PointX;
+        int headY = _head.PointY;
 
         _head.MoveUp();
 
-        for (int i = 1; i < _body.Count; i++)
-        {
-            _body[i].SetPosition(tempX, tempY);
-        }
+        RepositionBody(headX, headY);
 
         direction = Direction.Up;
     }
@@ -100,16 +91,31 @@ internal sealed class Snake
             return;
         }
 
-        int tempX = _head.PointX;
-        int tempY = _head.PointY;
+        int headX = _head.PointX;
+        int headY = _head.PointY;
 
         _head.MoveDown();
 
-        for (int i = 1; i < _body.Count; i++)
-        {
-            _body[i].SetPosition(tempX, tempY);
-        }
+        RepositionBody(headX, headY);
 
         direction = Direction.Down;
+    }
+
+    private void RepositionBody(int headX, int headY)
+    {
+        for (int i = 1; i < _body.Count; i++)
+        {
+            int tempX = _body[i].PointX;
+            int tempY = _body[i].PointY;
+            _body[i].SetPosition(headX, headY);
+            headX = tempX;
+            headY = tempY;
+        }
+    }
+
+    public void EatFood(int pointX, int pointY)
+    {
+        _body.Add(new Position(pointX, pointY));
+        _tail = _body[^1];
     }
 }

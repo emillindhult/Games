@@ -13,9 +13,4 @@ internal sealed class Food
         _startPosition = new Position(random.Next(0, 16), random.Next(0, 31));
         _position = _startPosition;
     }
-
-    public void GenerateFood()
-    {
-
-    }
 }

@@ -119,7 +119,7 @@ internal sealed class Board
 
     private bool CheckForCollision()
     {
-        if (_wallPositions.Contains(_snake.Head))
+        if (_wallPositions.Contains(_snake.Head) )
         {
             return true;
         }
@@ -172,6 +172,7 @@ internal sealed class Board
                 break;
         }
 
+
         foreach (var part in _snake.Body)
         {
             _grid[part.PointX, part.PointY] = SnakeBody;
@@ -180,13 +181,24 @@ internal sealed class Board
         return false;
     }
 
-    public void GenerateFood()
+    private void GenerateFood()
     {
-        while (_snake.Body.Contains(_food.Position))
+        while (_snake.Body.Contains(_food.Position) || _wallPositions.Contains(_food.Position))
         {
-            _food.Position.SetPosition(_random.Next(1, 15), _random.Next(1, 30));
+            _food.Position.SetPosition(_random.Next(1, 16), _random.Next(1, 31));
         }
 
         _grid[_food.Position.PointX, _food.Position.PointY] = FoodBody;
+    }
+
+    private bool ProcessFood()
+    {
+        if (_snake.Head.Equals(_food.Position))
+        {
+            GenerateFood();
+            Position tempPosition = _food.Position;
+        }
+
+        return false;
     }
 }
