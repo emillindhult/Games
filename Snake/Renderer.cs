@@ -37,6 +37,6 @@ internal sealed class Renderer : IRenderer
 
         Console.SetCursorPosition(0, 0);
         Console.Out.Write(frameBuffer);
-        Thread.Sleep(180);
+        Thread.Sleep(160);
     }
 }

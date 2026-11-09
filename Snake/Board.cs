@@ -134,6 +134,10 @@ internal sealed class Board
             return true;
         }
 
+        ProcessFood();
+
+
+
         _grid[_snake.Tail.PointX, _snake.Tail.PointY] = " ";
 
         if (!_possibleKeys.Contains(direction))
@@ -172,7 +176,6 @@ internal sealed class Board
                 break;
         }
 
-
         foreach (var part in _snake.Body)
         {
             _grid[part.PointX, part.PointY] = SnakeBody;
@@ -191,14 +194,12 @@ internal sealed class Board
         _grid[_food.Position.PointX, _food.Position.PointY] = FoodBody;
     }
 
-    private bool ProcessFood()
+    private void ProcessFood()
     {
         if (_snake.Head.Equals(_food.Position))
         {
+            _snake.EatFood(_food);
             GenerateFood();
-            Position tempPosition = _food.Position;
         }
-
-        return false;
     }
 }

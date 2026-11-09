@@ -19,7 +19,9 @@ internal sealed class Snake
     public Position Head => _head;
     public Position Tail => _tail;
 
-    public ConsoleColor Color { get; } = ConsoleColor.White;
+    private readonly Queue<Position> eatenFood = [];
+    private Position? currentFood;
+    private bool hasEaten = false;
 
     public Snake()
     {
@@ -37,12 +39,27 @@ internal sealed class Snake
             return;
         }
 
+        if (eatenFood.Count > 0)
+        {
+            if (eatenFood.Peek().Equals(_tail))
+            {
+                currentFood = eatenFood.Dequeue();
+            }
+        }
+
         int headX = _head.PointX;
         int headY = _head.PointY;
 
         _head.MoveRight();
 
         RepositionBody(headX, headY);
+
+        if (currentFood != null)
+        {
+            _body.Add(new Position(currentFood.PointX, currentFood.PointY));
+            _tail = _body[^1];
+            currentFood = null;
+        }
 
         direction = Direction.Right;
     }
@@ -55,12 +72,27 @@ internal sealed class Snake
             return;
         }
 
+        if (eatenFood.Count > 0)
+        {
+            if (eatenFood.Peek().Equals(_tail))
+            {
+                currentFood = eatenFood.Dequeue();
+            }
+        }
+
         int headX = _head.PointX;
         int headY = _head.PointY;
 
         _head.MoveLeft();
 
         RepositionBody(headX, headY);
+
+        if (currentFood != null)
+        {
+            _body.Add(new Position(currentFood.PointX, currentFood.PointY));
+            _tail = _body[^1];
+            currentFood = null;
+        }
 
         direction = Direction.Left;
     }
@@ -73,12 +105,27 @@ internal sealed class Snake
             return;
         }
 
+        if (eatenFood.Count > 0)
+        {
+            if (eatenFood.Peek().Equals(_tail))
+            {
+                currentFood = eatenFood.Dequeue();
+            }
+        }
+
         int headX = _head.PointX;
         int headY = _head.PointY;
 
         _head.MoveUp();
 
         RepositionBody(headX, headY);
+
+        if (currentFood != null)
+        {
+            _body.Add(new Position(currentFood.PointX, currentFood.PointY));
+            _tail = _body[^1];
+            currentFood = null;
+        }
 
         direction = Direction.Up;
     }
@@ -91,12 +138,27 @@ internal sealed class Snake
             return;
         }
 
+        if (eatenFood.Count > 0)
+        {
+            if (eatenFood.Peek().Equals(_tail))
+            {
+                currentFood = eatenFood.Dequeue();
+            }
+        }
+
         int headX = _head.PointX;
         int headY = _head.PointY;
 
         _head.MoveDown();
 
         RepositionBody(headX, headY);
+
+        if (currentFood != null)
+        {
+            _body.Add(new Position(currentFood.PointX, currentFood.PointY));
+            _tail = _body[^1];
+            currentFood = null;
+        }
 
         direction = Direction.Down;
     }
@@ -113,9 +175,13 @@ internal sealed class Snake
         }
     }
 
-    public void EatFood(int pointX, int pointY)
+    public void EatFood(Food food)
     {
-        _body.Add(new Position(pointX, pointY));
-        _tail = _body[^1];
+        eatenFood.Enqueue(new Position(food.Position.PointX, food.Position.PointY));
     }
+
+    //public void EatFood(int pointX, int pointY)
+    //{
+    //    eatenFood.Add()
+    //}
 }
